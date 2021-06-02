@@ -12,5 +12,8 @@
 
 #include "typedef.h"
 
+
+void set_bg(u8 color);
 void put_pixel(u8 color, int x, int y);
+u8 get_bg_color();
 #endif

@@ -13,7 +13,7 @@ void print_string(const char* msg, int len, int _x, int _y, u8 color)
             for (int x = 0; x < 8; x++)
             {
                 u8 set = (chr[y] >> x) & 0x01;
-                put_pixel(set ? color: 0x00, (_x + x) + (l * 8), _y + y);
+                put_pixel(set ? color: get_bg_color(), (_x + x) + (l * 8), _y + y);
             }
         }
     }
