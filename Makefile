@@ -3,14 +3,12 @@ CCFLAGS= -m32 --std=c11 -O2 -g -Wall -Wextra -Wpedantic -Wstrict-aliasing -Wno-p
 CCFLAGS+= -Wno-unused-parameter -nostdlib -nostdinc -ffreestanding
 CCFLAGS+= -fno-pie -fno-stack-protector -fno-builtin-function -fno-builtin -c
 
-
-
 NASMFLAGS=-f bin
 asm_files=$(wildcard ./*.asm)
 
 kernel_src=kernel
-kernel_files_h=$(wildcard $(kernel_src)/*.h)
 kernel_files_c=$(wildcard $(kernel_src)/*.c)
+kernel_objs=$(patsubst $(kernel_src)/%.c, $(output_folder)/%.o, $(kernel_files_c))
 
 output_folder=objs
 
@@ -25,10 +23,13 @@ $(output_folder)/boot_loader.bin: $(asm_files) directory
 $(output_folder)/kernel_loader.o: ./kernel/kernel_loader.asm directory
 	nasm $< -f elf -o $@
 
-$(output_folder)/kernel.o: $(kernel_files_c) $(kernel_files_h) directory
+$(output_folder)/%.o: $(kernel_src)/%.c $(kernel_src)/%.h directory
 	$(CC) $(CCFLAGS) $< -o $@
 
-$(output_folder)/kernel.bin: $(output_folder)/kernel_loader.o $(output_folder)/kernel.o
+$(output_folder)/%.o: $(kernel_src)/%.c directory
+	$(CC) $(CCFLAGS) $< -o $@
+
+$(output_folder)/kernel.bin: $(output_folder)/kernel_loader.o $(kernel_objs)
 	ld -o $@ -m elf_i386 --oformat binary -Ttext 0x10000 $^
 
 run: os_image
