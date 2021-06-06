@@ -1,7 +1,7 @@
 CC=gcc
 CCFLAGS= -m32 --std=c11 -O2 -g -Wall -Wextra -Wpedantic -Wstrict-aliasing -Wno-pointer-arith
 CCFLAGS+= -Wno-unused-parameter -nostdlib -nostdinc -ffreestanding
-CCFLAGS+= -fno-pie -fno-stack-protector -fno-builtin-function -fno-builtin -c
+CCFLAGS+= -fno-pie -fno-stack-protector -fno-builtin-function -fno-builtin -mgeneral-regs-only -c
 
 NASMFLAGS=-f bin
 asm_files=$(wildcard ./*.asm)

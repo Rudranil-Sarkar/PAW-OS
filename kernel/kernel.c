@@ -1,6 +1,7 @@
 #include "graphics_driver.h"
 #include "paw_bitmap.h"
 #include "font_renderer.h"
+#include "idt.h"
 
 int strlen(char* str)
 {
@@ -12,6 +13,7 @@ int strlen(char* str)
 
 void _main()
 {
+	idt_init();
 	u8 startx = 110;
 	u8 starty = 30;
 	for (int i = 0; i < 100; i++)
@@ -23,4 +25,5 @@ void _main()
 	}
 	char* paw_os = "PAW OS";
 	print_string(paw_os, strlen(paw_os), 138, 120, 0x5B);
+	__asm__ volatile ("int $0x20");
 }
