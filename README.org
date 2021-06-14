@@ -1,9 +1,7 @@
 #+TITLE: PAW_OS
 #+AUTHOR: Rudranil Sarkar
 
-#+begin_center
-[[./Screenshots/screen.png]]
-#+end_center
+#+html: <p align="center"><img src="./Screenshots/screen.png"/></src>
 
 * TABLE OF CONTENTS :toc:
 - [[#description][Description]]
