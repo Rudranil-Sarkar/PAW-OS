@@ -1,7 +1,24 @@
 #include "font_renderer.h"
 #include "font.h"
 
-void print_string(const char* msg, int len, int _x, int _y, u8 color)
+u16 x = 0;
+u16 y = 0;
+
+int strlen(char* str)
+{
+  int res = 0;
+  for (int i = 0; str[i] != '\0'; i++)
+    res++;
+  return res;
+}
+
+void print_string(const char* msg, int len, u8 color)
+{
+      print_string_exact(msg, len, x, y, color);
+      x += len * 8;
+}
+
+void print_string_exact(const char* msg, int len, int _x, int _y, u8 color)
 {
     /* each font is 8x8 in size so after we render our font we need to move to 8 pixels */
 
