@@ -9,7 +9,7 @@
 - [[#build-instruction][Build Instruction]]
   - [[#for-emulator][For Emulator]]
   - [[#for-real-hardware][For Real Hardware]]
-- [[#current-progress-60][Current Progress]]
+- [[#current-progress-90][Current Progress]]
 - [[#roadmap][Roadmap]]
 
 * Description
@@ -40,20 +40,21 @@ dd if=objs/kernel.bin of=<The ISO File> conv=notrunc bs=1 seek=512 status=progre
 sudo dd if=<The ISO File> of=<Your Flash Drive> status=progress # Burn the ISO File in the flash drive
     #+end_src
 
-* Current Progress [60%]
+* Current Progress [90%]
 - [X] Load the bootloader
 - [X] Read the sectors from harddrive
 - [X] Switch to a graphics mode
 - [X] Enter Protected Mode
 - [X] Load the Kernel
 - [X] Bitmap font rendering
-- [-] Setup IDT
-- [ ] Setup ISR(Interrupt Service Routine)s
-- [ ] Setup and Initialize the PIC
+- [X] Setup IDT
+- [X] Setup ISR(Interrupt Service Routine)s
+- [X] Setup and Initialize the PIC
 - [ ] Functional PS2 keyboard driver
 
 
 * Roadmap
+- Use VBE(Vesa Bios Extensions) to get a more proper resolution
 - Support for USB devices
 - Working filesystem
 - Load other programs from the disk
