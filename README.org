@@ -1,0 +1,62 @@
+#+TITLE: PAW_OS
+#+AUTHOR: Rudranil Sarkar
+
+#+begin_center
+[[./Screenshots/screen.png]]
+#+end_center
+
+* TABLE OF CONTENTS :toc:
+- [[#description][Description]]
+- [[#dependencies][Dependencies]]
+- [[#build-instruction][Build Instruction]]
+  - [[#for-emulator][For Emulator]]
+  - [[#for-real-hardware][For Real Hardware]]
+- [[#current-progress-60][Current Progress]]
+- [[#roadmap][Roadmap]]
+
+* Description
+This is demo operating system that boots up and displays a logo and a message to the screen. Nothing usefull for now. Currently the project is mainly targets the old bios style boot systems not UEFI/EFI. (Although you can boot it using legacy mode support in UEFI systems)
+
+* Dependencies
+- nasm (Assembler)
+- gcc  (C Compiler)
+- ld   (Linker)
+
+* Build Instruction
+I highly recommend to run it in a emulator such as qemu or bochs as it may not work in real hardware.
+
+** For Emulator
+Just use the included makefile to build the os_image. Use that as in any emulator to run it.
+#+begin_src Makefile
+make
+#+end_src
+
+** For Real Hardware
+ 1. First blank make a ISO file (If using linux you can use dd to create it)
+ 2. Make a mbr partition table/scheme and a partition use fdisk to create a mbr partition table and a partitiom
+ 3.
+    #+begin_src sh
+dd if=objs/boot_loader.bin of=<The ISO File> conv=notrunc bs=440 count=1 # Skip the mbr partitiom
+dd if=objs/boot_loader.bin of=<The ISO File> conv=notrunc bs=1 count=2 skip=510 seek=510 # The preserve the magic number
+dd if=objs/kernel.bin of=<The ISO File> conv=notrunc bs=1 seek=512 status=progress  # Add the kernel
+sudo dd if=<The ISO File> of=<Your Flash Drive> status=progress # Burn the ISO File in the flash drive
+    #+end_src
+
+* Current Progress [60%]
+- [X] Load the bootloader
+- [X] Read the sectors from harddrive
+- [X] Switch to a graphics mode
+- [X] Enter Protected Mode
+- [X] Load the Kernel
+- [X] Bitmap font rendering
+- [-] Setup IDT
+- [ ] Setup ISR(Interrupt Service Routine)s
+- [ ] Setup and Initialize the PIC
+- [ ] Functional PS2 keyboard driver
+
+
+* Roadmap
+- Support for USB devices
+- Working filesystem
+- Load other programs from the disk
+- Simple text based user interface
