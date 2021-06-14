@@ -50,9 +50,8 @@ sudo dd if=<The ISO File> of=<Your Flash Drive> status=progress # Burn the ISO F
 - [X] Setup IDT
 - [X] Setup ISR(Interrupt Service Routine)s
 - [X] Setup and Initialize the PIC
-- [ ] Functional PS2 keyboard driver
-
-
+- [-] Functional PS2 keyboard driver
+  + [-] Translate the scancodes from keyboard to ascii characters
 * Roadmap
 - Use VBE(Vesa Bios Extensions) to get a more proper resolution
 - Support for USB devices
