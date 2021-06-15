@@ -21,7 +21,7 @@ This is demo operating system that boots up and displays a logo and a message to
 - ld   (Linker)
 
 * Build Instruction
-I highly recommend to run it in a emulator such as qemu or bochs as it may not work in real hardware.
+*I highly recommend to run it in a emulator such as qemu or bochs as it may not work in real hardware.*
 
 ** For Emulator
 Just use the included makefile to build the os_image. Use that as in any emulator to run it.
@@ -40,7 +40,7 @@ dd if=objs/kernel.bin of=<The ISO File> conv=notrunc bs=1 seek=512 status=progre
 sudo dd if=<The ISO File> of=<Your Flash Drive> status=progress # Burn the ISO File in the flash drive
     #+end_src
 
-* Current Progress [90%]
+* TODO Current Progress [90%]
 - [X] Load the bootloader
 - [X] Read the sectors from harddrive
 - [X] Switch to a graphics mode
@@ -50,6 +50,7 @@ sudo dd if=<The ISO File> of=<Your Flash Drive> status=progress # Burn the ISO F
 - [X] Setup IDT
 - [X] Setup ISR(Interrupt Service Routine)s
 - [X] Setup and Initialize the PIC
+- [X] PS2 Controller Driver Implementation
 - [-] Functional PS2 keyboard driver
   + [-] Translate the scancodes from keyboard to ascii characters
 * Roadmap
