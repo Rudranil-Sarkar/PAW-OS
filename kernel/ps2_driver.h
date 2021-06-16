@@ -10,6 +10,7 @@
 #define COMMAND_PORT 0x64
 
 void send_command(u8 opcode);
+void send_data_to_device(u8 opcode);
 u8 read_data();
 u8 read_status();
 

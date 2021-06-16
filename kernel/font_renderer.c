@@ -35,3 +35,25 @@ void print_string_exact(const char* msg, int len, int _x, int _y, u8 color)
         }
     }
 }
+
+void print_hex(u8 num)
+{
+  char* hex = "0x00";
+  for(int i = 0; i < 2; i++)
+  {
+    u8 temp = num >> (i * 4);
+    temp = temp & 0x0F;
+
+    if (temp <= 9)
+    {
+      // Print 0-9
+      hex[3 - i] += temp;
+    }
+    else
+    {
+      // Print A-F
+      hex[3 - i] += temp + 7;
+    }
+  }
+  print_string(hex, 4, 0x0F);
+}
