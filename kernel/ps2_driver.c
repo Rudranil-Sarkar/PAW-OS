@@ -12,6 +12,11 @@ u8 read_data()
     return res;
 }
 
+void send_data_to_device(u8 opcode)
+{
+    outb(DATA_PORT, opcode);
+}
+
 u8 read_status()
 {
     u8 res;
