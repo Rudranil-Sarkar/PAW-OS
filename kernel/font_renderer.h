@@ -5,5 +5,6 @@
 
 void print_string_exact(const char* msg, int len, int _x, int _y, u8 color);
 void print_string(const char* msg, int len, u8 color);
+void print_hex(u8 num);
 int strlen(char* str);
 #endif
