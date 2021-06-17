@@ -4,6 +4,7 @@
 #include "font_renderer.h"
 #include "low-level-op.h"
 #include "pic.h"
+#include "keyboard.h"
 
 /******************************************************************************/
 /* According to gcc manual this the correct way to declare interrupt routines */
@@ -32,8 +33,15 @@ void irq0(struct interrupt_frame *frame) {reset_irq(0); }
 
 __attribute__((interrupt))
 void irq1(struct interrupt_frame *frame) {
-  print_string("ab", 2, 15);
-  inb(0x60);
+  u8 scancode = read_data();
+  char a = decode_scancode(scancode);
+
+  if(a != -0x02 && a != -0x03)
+  {
+    char str[1] = {a};
+    print_string(str, 1, 0x0F);
+  }
+
   reset_irq(1);
 }
 
