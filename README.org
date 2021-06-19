@@ -1,7 +1,8 @@
 #+TITLE: PAW_OS
 #+AUTHOR: Rudranil Sarkar
 
-#+html: <p align="center"><img src="./Screenshots/screen.png"/></src>
+#+ATTR_HTML: :alt Screen.gif :title Screen Demo :align center
+[[https://github.com/Rudranil-Sarkar/PAW-OS/blob/master/Screenshots/out.gif]]
 
 * TABLE OF CONTENTS :toc:
 - [[#description][Description]]
@@ -13,7 +14,7 @@
 - [[#roadmap][Roadmap]]
 
 * Description
-This is demo operating system that boots up and displays a logo and a message to the screen. Nothing usefull for now. Currently the project is mainly targets the old bios style boot systems not UEFI/EFI. (Although you can boot it using legacy mode support in UEFI systems)
+This is demo operating system that boots up and displays a logo and echoing keystrokes to the screen. Nothing usefull for now. Currently the project is mainly targets the old bios style boot systems not UEFI/EFI. (Although you can boot it using legacy mode support in UEFI systems)
 
 * Dependencies
 - nasm (Assembler)
