@@ -61,6 +61,3 @@ sudo dd if=<The ISO File> of=<Your Flash Drive> status=progress # Burn the ISO F
 * Roadmap
 - Use VBE(Vesa Bios Extensions) to get a more proper resolution
 - Support for USB devices
-- Working filesystem
-- Load other programs from the disk
-- Simple text based user interface
