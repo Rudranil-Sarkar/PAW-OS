@@ -1,8 +1,13 @@
 #include "graphics_driver.h"
-char* video_memory = (char*) video_memory_address;
 u8 bg_color = 0x00;
 
-void put_pixel(u8 color, int x, int y) 
+
+void graphics_init() {
+	u32* address = (u32*)GRAPHICS_MEMORY_BASE;
+	u32 a = *address;
+	video_memory = (char*) a;
+}
+void put_pixel(u8 color, int x, int y)
 {
 	video_memory[MAX_WIDTH * y + x] = color;
 }
