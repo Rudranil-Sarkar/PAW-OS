@@ -11,7 +11,7 @@
   - [[#for-emulator][For Emulator]]
   - [[#for-real-hardware][For Real Hardware]]
 - [[#current-progress-73][Current Progress]]
-- [[#roadmap][Roadmap]]
+- [[#planning-features][Planning Features]]
 
 * Description
 This is demo operating system that boots up and displays a logo and echoing keystrokes to the screen. Nothing usefull for now. Currently the project is mainly targets the old bios style boot systems not UEFI/EFI. (Although you can boot it using legacy mode support in UEFI systems)
@@ -54,10 +54,13 @@ sudo dd if=<The ISO File> of=<Your Flash Drive> status=progress # Burn the ISO F
 - [X] PS2 Controller Driver Implementation
 - [X] Functional PS2 keyboard driver
   + [X] Translate the scancodes from keyboard to ascii characters
-- [ ] PCI Driver
+- [-] PCI Driver
 - [ ] AHCI Controller Driver
 - [ ] File System
 - [ ] Shell
-* Roadmap
-- Use VBE(Vesa Bios Extensions) to get a more proper resolution
+
+* Planning Features
+- +Use VBE(Vesa Bios Extensions) to get a more proper resolution+
+- ACPI
+- PCI-E Support
 - Support for USB devices

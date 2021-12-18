@@ -1,6 +1,5 @@
 /*
  * the most basic graphics driver implementaion ever
- * TODO get_pixel color from a given coordinate
 */
 
 #ifndef __GRAPHICS_DRIVER_H__
@@ -15,5 +14,6 @@
 
 void set_bg(u8 color);
 void put_pixel(u8 color, int x, int y);
+u8 get_pixel (int x, int y);
 u8 get_bg_color();
 #endif
