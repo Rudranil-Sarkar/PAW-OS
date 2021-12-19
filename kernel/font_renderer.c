@@ -1,8 +1,13 @@
 #include "font_renderer.h"
 #include "font.h"
 
-u16 x = 0;
-u16 y = 0;
+u32 cursorX = 0;
+u32 cursorY = 0;
+
+void setCursor(u16 x, u16 y) {
+  cursorX = x;
+  cursorY = y;
+}
 
 int strlen(char* str)
 {
@@ -12,31 +17,33 @@ int strlen(char* str)
   return res;
 }
 
-void print_string(const char* msg, int len, u8 color)
-{
-      print_string_exact(msg, len, x, y, color);
-      x += len * 8;
-}
-
-void print_string_exact(const char* msg, int len, int _x, int _y, u8 color)
-{
-    /* each font is 8x8 in size so after we render our font we need to move to 8 pixels */
-
-    for (int l = 0; l < len; l++)           // looping over the string to print the each character
-    {
-        u8 *chr = font8x8_basic[msg[l]];    // choose the right bitmap set for our character
-        for (int y = 0; y < 8; y++)
-        {
-            for (int x = 0; x < 8; x++)
-            {
-                u8 set = (chr[y] >> x) & 0x01;
-                put_pixel(set ? color: get_bg_color(), (_x + x) + (l * 8), _y + y);
-            }
-        }
+void print_char(const char chr, u8 color, u8 bg_color) {
+  if (chr == '\n') {
+    cursorX = 0;
+    cursorY += 8;
+  }
+  u8 *fontbitmap = font8x8_basic[(u8)chr]; // choose the right bitmap set for our character
+  for (int fonty = 0; fonty < 8; fonty++) {
+    for (int fontx = 0; fontx < 8; fontx++) {
+      u8 set = (fontbitmap[fonty] >> fontx) & 0x01;
+      put_pixel(set ? color : bg_color, (cursorX + fontx), cursorY + fonty);
     }
+  }
+  cursorX += 8;
+  if (cursorX >= 1024) {
+    cursorX = 0;
+    cursorY += 8;
+  }
 }
 
-void print_hex(u8 num)
+void print_string(const char* msg, int len, u8 color, u8 bg_color)
+{
+  for (int i = 0; i < len; i++) {
+    print_char(msg[i], color, bg_color);
+  }
+}
+
+void print_hex(u8 num, u8 color, u8 bg_color)
 {
   char* hex = "0x00";
   for(int i = 0; i < 2; i++)
@@ -55,5 +62,5 @@ void print_hex(u8 num)
       hex[3 - i] += temp + 7;
     }
   }
-  print_string(hex, 4, 0x0F);
+  print_string(hex, 4, color, bg_color);
 }

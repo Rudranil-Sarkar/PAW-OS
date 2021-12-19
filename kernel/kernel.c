@@ -12,9 +12,6 @@ void _main()
 
 	u8 startx = 0;
 	u8 starty = 0;
-	for (int i = 0; i < 128; i++) {
-		print_string("F", 1, 0x5B);
-	}
 	for (int i = 0; i < 100; i++)
 	{
 		for(int j = 0; j < 100; j++)
@@ -24,5 +21,6 @@ void _main()
 	}
 
 	char* paw_os = "PAW OS";
-	print_string_exact(paw_os, strlen(paw_os), 138, 120, 0x5B);
+	setCursor(138, 120);
+	print_string(paw_os, strlen(paw_os), 0x5B, FONT_DEFAULT_BG_COLOR);
 }

@@ -21,9 +21,9 @@ struct interrupt_frame {
 } __attribute__((packed));
 
 /* A generic exception handler that just completely hanges the computer */
-__attribute__((interrupt))
+static __attribute__((interrupt))
 void exception_handler(struct interrupt_frame *frame) {
-  print_string_exact("error", 5, 0, 0, 0x5B);
+  print_string("error", 5, 0x5B, FONT_DEFAULT_BG_COLOR);
   __asm__("cli\n\thlt");
   while (1) {}
 }
@@ -39,7 +39,7 @@ void irq1(struct interrupt_frame *frame) {
   if(a != -0x02 && a != -0x03)
   {
     char str[1] = {a};
-    print_string(str, 1, 0x0F);
+    print_string(str, 1, 0x0F, FONT_DEFAULT_BG_COLOR);
   }
 
   reset_irq(1);
