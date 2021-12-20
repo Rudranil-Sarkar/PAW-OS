@@ -14,16 +14,17 @@
 	mov [boot_drive], dl		; the bios stroes our boot drive in dl better to store it
 	sti
 
-modeblock:	times 256 db 0  	; For setting the framebuffer address
-
 main
 	mov di, Welcome_msg
 	call print_string
 	;; Get the VESA info and store it in modeblock buffer
 	mov ax, 0x4F01				; The actual function we want to call to get the info
 	mov cx, 0x4105				; The mode number for display mode we want
-	mov di, modeblock			; The pointer for storing the VBE info structure
+	mov di, 0x9980				; The pointer for storing the VBE info structure
 	int 0x10
+
+	cmp ax, 0x4F
+	jne Disk_error
 
 	;; Read the hard drive and load the kernel into memory
 	call read_disk
@@ -149,7 +150,6 @@ protected_mode_setup:
 	mov ebp, esp
 
 	mov eax, 0x10000
-	mov esi, modeblock
 	jmp 0x10000								; go and start execute the kernel code
 
 times 510 - ($ - $$) db 0					; fill the void
