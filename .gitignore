@@ -1,3 +1,4 @@
 objs/
 os_image
 .ccls-cache/
+*.iso
