@@ -9,10 +9,9 @@ asm_files=$(wildcard ./*.asm)
 kernel_src=kernel
 kernel_files_c=$(wildcard $(kernel_src)/*.c)
 kernel_objs=$(patsubst $(kernel_src)/%.c, $(output_folder)/%.o, $(kernel_files_c))
+isoname=image.iso
 
 output_folder=objs
-
-all: os_image
 
 os_image: $(output_folder)/boot_loader.bin $(output_folder)/kernel.bin
 	cat $^ > $@
@@ -38,3 +37,11 @@ run: os_image
 directory:
 	mkdir -p $(output_folder)
 
+blank_iso:
+	dd if=/dev/zero of=$(isoname) iflag=fullblock bs=1M count=300
+	fdisk $(isoname) < fdisk_input
+
+iso: blank_iso os_image
+	dd if=objs/boot_loader.bin of=$(isoname) conv=notrunc bs=440 count=1 # Skip the mbr partitiom
+	dd if=objs/boot_loader.bin of=$(isoname) conv=notrunc bs=1 count=2 skip=510 seek=510 # The preserve the magic number
+	dd if=objs/kernel.bin 	   of=$(isoname) conv=notrunc bs=1 seek=512 status=progress  # Add the kernel
