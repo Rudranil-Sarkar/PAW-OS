@@ -3,8 +3,10 @@ print_string:
 	mov bh, 0x00
 	.loop:
 		cmp byte[di], 0
-		ret
+		je return
 		mov al, byte[di]
 		inc di
 		int 0x10
 		jmp .loop
+return:
+	ret
