@@ -34,33 +34,29 @@ char decode_scancode(u8 scancode)
 
     if (_SHIFT_STATUS)
     {
-        if(keycode >= 'a' && keycode <= 'z')
-            keycode = keycode - 32;
-
-        if(keycode == '1') keycode = '!';
-        if(keycode == '2') keycode = '@';
-        if(keycode == '3') keycode = '#';
-        if(keycode == '4') keycode = '$';
-        if(keycode == '5') keycode = '%';
-        if(keycode == '6') keycode = '^';
-        if(keycode == '7') keycode = '&';
-        if(keycode == '8') keycode = '*';
-        if(keycode == '9') keycode = '(';
-        if(keycode == '0') keycode = ')';
-
-        if(keycode == '-') keycode = '_';
-        if(keycode == '=') keycode = '+';
-
-        if(keycode == '[') keycode = '{';
-        if(keycode == ']') keycode = '}';
-        if(keycode == '\\') keycode = '|';
-
-        if(keycode == ';') keycode = ':';
-        if(keycode == '\'') keycode = '"';
-
-        if(keycode == ',') keycode = '<';
-        if(keycode == '.') keycode = '>';
-        if(keycode == '/') keycode = '?';
+        switch (keycode) {
+            case 'a' ... 'z': keycode = keycode - 32; break;
+            case '1'  : keycode = '!'; break;
+            case '2'  : keycode = '@'; break;
+            case '3'  : keycode = '#'; break;
+            case '4'  : keycode = '$'; break;
+            case '5'  : keycode = '%'; break;
+            case '6'  : keycode = '^'; break;
+            case '7'  : keycode = '&'; break;
+            case '8'  : keycode = '*'; break;
+            case '9'  : keycode = '('; break;
+            case '0'  : keycode = ')'; break;
+            case '-'  : keycode = '_'; break;
+            case '='  : keycode = '+'; break;
+            case '['  : keycode = '{'; break;
+            case ']'  : keycode = '}'; break;
+            case '\\' : keycode = '|'; break;
+            case ';'  : keycode = ':'; break;
+            case '\'' : keycode = '"'; break;
+            case ','  : keycode = '<'; break;
+            case '.'  : keycode = '>'; break;
+            case '/'  : keycode = '?'; break;
+        }
     }
 
     return keycode;
