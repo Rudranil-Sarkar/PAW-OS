@@ -5,6 +5,7 @@
 #include "low-level-op.h"
 #include "pic.h"
 #include "keyboard.h"
+#include "vga_colors.h"
 
 /******************************************************************************/
 /* According to gcc manual this the correct way to declare interrupt routines */
@@ -36,7 +37,17 @@ void irq1(struct interrupt_frame *frame) {
   u8 scancode = read_data();
   char a = decode_scancode(scancode);
 
-  if(a != -0x02 && a != -0x03)
+  /* switch (a) { */
+  /*   case KEY_PAGE_UP: */
+  /*     break; */
+
+  /* } */
+
+  // A switch case will be better I know but this section is marked for removal
+  if (a == KEY_PAGE_UP)
+    print_string("Page up", strlen("page up"), 0x0F, FONT_DEFAULT_BG_COLOR);
+
+  else if(a != -0x02 && a != -0x03)
   {
     char str[1] = {a};
     print_string(str, 1, 0x0F, FONT_DEFAULT_BG_COLOR);

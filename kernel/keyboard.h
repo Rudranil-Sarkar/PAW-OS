@@ -6,6 +6,14 @@
 #define ACK_BYTE 0xFA
 #define RESEND_BYTE 0xFE
 
+enum special_keys {
+  KEY_RETURN,
+  KEY_BACKSPACE,
+  KEY_PAGE_UP,
+  KEY_PAGE_DOWN,
+  KEY_CONTROL,
+  KEY_ALT,
+};
 
 static s8* keycode_table[] = {
 "nill", "ESC",   "1",      "2",     // 0x00

@@ -1,9 +1,11 @@
 #include "keyboard.h"
 
-static u8 _CAPS_LOCK_STATUS = 0;
-static u8 _SHIFT_STATUS = 0;
-static u8 _CTRLSTATUS = 0;
-static u8 _ALT_STATUS = 0;
+static u8 _CAPS_LOCK_STATUS  = 0;
+static u8 _SHIFT_STATUS      = 0;
+static u8 _CTRLSTATUS        = 0;
+static u8 _ALT_STATUS        = 0;
+static u8 _MULTIMEDIA_PREFIX = 0;
+
 
 char decode_scancode(u8 scancode)
 {
