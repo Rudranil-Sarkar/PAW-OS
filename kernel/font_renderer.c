@@ -43,7 +43,7 @@ void print_string(const char* msg, int len, u8 color, u8 bg_color)
   }
 }
 
-void print_hex(u8 num, u8 color, u8 bg_color)
+void print_hex_byte(u8 num, u8 color, u8 bg_color)
 {
   char* hex = "0x00";
   for(int i = 0; i < 2; i++)
@@ -62,5 +62,47 @@ void print_hex(u8 num, u8 color, u8 bg_color)
       hex[3 - i] += temp + 7;
     }
   }
-  print_string(hex, 4, color, bg_color);
+  print_string(hex, strlen(hex), color, bg_color);
+}
+
+void print_hex_word(u16 num, u8 color, u8 bg_color) {
+  char* hex = "0x0000";
+  for(int i = 0; i < 4; i++)
+  {
+    u8 temp = num >> (i * 4);
+    temp = temp & 0x0F;
+
+    if (temp <= 9)
+    {
+      // Print 0-9
+      hex[5 - i] += temp;
+    }
+    else
+    {
+      // Print A-F
+      hex[5 - i] += temp + 7;
+    }
+  }
+  print_string(hex, strlen(hex), color, bg_color);
+}
+
+void print_hex_dword(u32 num, u8 color, u8 bg_color) {
+  char* hex = "0x00000000";
+  for(int i = 0; i < 8; i++)
+  {
+    u8 temp = num >> (i * 4);
+    temp = temp & 0x0F;
+
+    if (temp <= 9)
+    {
+      // Print 0-9
+      hex[9 - i] += temp;
+    }
+    else
+    {
+      // Print A-F
+      hex[9 - i] += temp + 7;
+    }
+  }
+  print_string(hex, strlen(hex), color, bg_color);
 }
